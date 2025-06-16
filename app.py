@@ -21,4 +21,4 @@ def sort_word():
     return jsonify({'sorted_word': sorted_word})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
