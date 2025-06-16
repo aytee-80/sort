@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+
+<html>
+    <head>
+        <title>Word Reversal</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+
+        </style>
+
+
+    </head>
+
+    <body>
+        <h1>Word Sort</h1>
+
+        <label for = "word">Word:</label>
+        <input type="text" id="Word" placeholder="Enter a word">
+        <input type = "submit" name = "submit" onclick="send()">
+        <p id="response"></p>
+
+        <script>
+            function send() {
+                var word = document.getElementById("Word").value;
+
+                fetch("http://localhost:5000/reverse", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body : JSON.stringify({ word: word })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.sorted_word) {
+                        document.getElementById("response").innerText = "Sorted Word: " + data.sorted_word;
+                    } else {
+                        document.getElementById("response").innerText = "Error: " + data.error;
+                    }
+                })
+            
+            }
+
+        </script>
+    </body>
+
+
+
+</html>
